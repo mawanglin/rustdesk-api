@@ -83,6 +83,13 @@ func ApiInit(g *gin.Engine) {
 		l := &api.Login{}
 		frg.POST("/logout", l.Logout)
 	}
+
+	{
+		// RustDesk 1.4.x 客户端设备部署/登记端点
+		d := &api.Device{}
+		frg.POST("/devices/deploy", d.Deploy)
+		frg.POST("/devices/cli", d.Cli)
+	}
 	{
 		gr := &api.Group{}
 		frg.GET("/users", gr.Users)
