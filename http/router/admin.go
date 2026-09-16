@@ -61,6 +61,10 @@ func RustdeskCmdBind(adg *gin.RouterGroup) {
 	rg.GET("/cmdList", cont.CmdList)
 	rg.POST("/cmdDelete", cont.CmdDelete)
 	rg.POST("/cmdCreate", cont.CmdCreate)
+	// 上游漏注册：控制器 CmdUpdate 一直存在（controller/admin/rustdesk.go），
+	// 但前端 api/rustdesk.js 的 update() 打的是 /rustdesk/cmdUpdate，
+	// 缺这行则"编辑已有控制台命令"必 404，新建/删除正常。
+	rg.POST("/cmdUpdate", cont.CmdUpdate)
 }
 func LoginBind(rg *gin.RouterGroup) {
 	cont := &admin.Login{}
